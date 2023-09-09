@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Login from "./pages/login";
+import { AuthContext } from "./context/AuthContext";
+import { User } from "./hooks/useUser";
+import { useAuth } from "./hooks/useAuth";
+import Dashboard from "./pages/dashboard";
 
-function App() {
+const Routes = () => {
+  // there are no routes tbf... I just need a component
+  // with access to the auth context to know whether
+  // the user is logged in or not
+
+  const { user } = useAuth();
+  if (!user) {
+    return <Login />;
+  }
+  return <Dashboard />;
+};
+
+const App = () => {
+  const [user, setUser] = useState<User | null>(null);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthContext.Provider value={{ user, setUser }}>
+      <Login />
+    </AuthContext.Provider>
   );
-}
+};
 
 export default App;
