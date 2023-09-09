@@ -3,3 +3,71 @@ html {
   color: white;
   padding: 20px;
 }
+
+.button {
+  background-image: none;
+  background: #4b5362;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: large;
+  margin: 4px;
+  padding: 4px 8px;
+  text-transform: none;
+  transition: all 0.2s;
+}
+.button:hover {
+  background: #70798c;
+}
+.button:disabled {
+  cursor: not-allowed;
+}
+
+.button.red {
+  background: #b71c1c;
+  color: white;
+}
+.button.red:hover {
+  background: #e53935;
+}
+.button.green {
+  background: #0d47a1;
+  color: white;
+}
+.button.green:hover {
+  background: #2196f3;
+}
+.button.blue {
+  background: #0d47a1;
+  color: white;
+}
+.button.blue:hover {
+  background: #2196f3;
+}
+
+.text-input {
+  background-color: #282c34;
+  border-radius: 8px;
+  border: 2px solid #353942;
+  color: white;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  outline: none;
+  padding: 2px 6px;
+  transition: 0.3s;
+}
+.text-input:focus {
+  border-color: #40444e;
+  box-shadow: 0 0 8px 0 #40444e;
+}
+.text-input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.text-input-wrapper label {
+  font-size: small;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}

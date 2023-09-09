@@ -35,7 +35,7 @@ const Login = () => {
   const { login } = useAuth();
 
   // form submission
-  const onSubmit = (e: SyntheticEvent<HTMLFormElement>) => {
+  const onSubmit = (e: SyntheticEvent<HTMLButtonElement>) => {
     e.preventDefault();
     const payload = {
       username,
@@ -48,29 +48,31 @@ const Login = () => {
   return (
     <div className="App">
       <div className="App-header">
-        <form name="login" onSubmit={onSubmit} className="login-form">
-          <label htmlFor="username">
-            <b>Username</b>
-          </label>
-          <input
-            type="text"
-            placeholder="Enter Username"
-            name="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-          <label htmlFor="password">
-            <b>Password</b>
-          </label>
-          <input
-            type="password"
-            placeholder="Enter Password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+        <div className="login-form">
+          <div className="text-input-wrapper">
+            <label htmlFor="username">Username</label>
+            <input
+              className="text-input"
+              type="text"
+              placeholder="Enter Username"
+              name="username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div className="text-input-wrapper">
+            <label htmlFor="password">Password</label>
+            <input
+              className="text-input"
+              type="password"
+              placeholder="Enter Password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
           {password.length > 0 && errors.length > 0 && (
             <div className="error-message">
@@ -83,10 +85,14 @@ const Login = () => {
             </div>
           )}
 
-          <button disabled={!isValid} type="submit">
+          <button
+            className={`mt-10 button ${isValid && "blue"}`}
+            disabled={!isValid}
+            onClick={(e) => onSubmit(e)}
+          >
             Login
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );

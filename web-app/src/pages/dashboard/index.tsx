@@ -149,10 +149,10 @@ const Dashboard = () => {
       </div>
 
       <div className="data-section">
-        <div className="search-wrapper">
+        <div className="text-input-wrapper">
           <label htmlFor="query">Search:</label>
           <input
-            className="search-input"
+            className="text-input"
             placeholder="search query"
             name="query"
             value={query}

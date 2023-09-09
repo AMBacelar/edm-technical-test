@@ -21,44 +21,6 @@
   padding-bottom: 8px;
 }
 
-.button {
-  background-image: none;
-  background: #4b5362;
-  border-radius: 4px;
-  border: none;
-  cursor: pointer;
-  font-size: larger;
-  margin: 4px;
-  padding: 4px 8px;
-  text-transform: none;
-  transition: all 0.2s;
-}
-.button:hover {
-  background: #70798c;
-}
-
-.button.red {
-  background: #b71c1c;
-  color: white;
-}
-.button.red:hover {
-  background: #e53935;
-}
-.button.green {
-  background: #0d47a1;
-  color: white;
-}
-.button.green:hover {
-  background: #2196f3;
-}
-.button.blue {
-  background: #0d47a1;
-  color: white;
-}
-.button.blue:hover {
-  background: #2196f3;
-}
-
 .breadcrumbs {
   color: white;
   cursor: pointer;
@@ -81,20 +43,6 @@ h1 {
 .data-section {
   margin-top: 24px;
   position: relative;
-}
-
-.search-wrapper {
-  display: flex;
-  flex-direction: column;
-}
-.search-wrapper label {
-  font-size: small;
-}
-.search-input {
-  border-radius: 8px;
-  font-size: 0.875rem;
-  line-height: 1.5rem;
-  padding: 2px 6px;
 }
 
 .space-between {
