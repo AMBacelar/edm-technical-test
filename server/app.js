@@ -61,10 +61,10 @@ app.get("/users", (req, res) => {
     firstNameAsc: "firstName",
     lastNameAsc: "lastName",
     emailAsc: "email",
-    usernameDec: "username",
-    firstNameDec: "firstName",
-    lastNameDec: "lastName",
-    emailDec: "email",
+    usernameDesc: "username",
+    firstNameDesc: "firstName",
+    lastNameDesc: "lastName",
+    emailDesc: "email",
   };
 
   const sortedData = sortBy
@@ -81,7 +81,7 @@ app.get("/users", (req, res) => {
             ? 1
             : -1;
 
-        return sortBy.includes("Dec") ? -comparison : comparison;
+        return sortBy.includes("Desc") ? -comparison : comparison;
       })
     : filteredData;
 
