@@ -35,7 +35,9 @@ const Login = () => {
   const { login } = useAuth();
 
   // form submission
-  const onSubmit = (e: SyntheticEvent<HTMLButtonElement>) => {
+  const onSubmit = (
+    e: SyntheticEvent<HTMLButtonElement> | SyntheticEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     const payload = {
       username,
@@ -48,7 +50,7 @@ const Login = () => {
   return (
     <div className="App">
       <div className="App-header">
-        <div className="login-form">
+        <form name="login-form" onSubmit={onSubmit} className="login-form">
           <div className="text-input-wrapper">
             <label htmlFor="username">Username</label>
             <input
@@ -92,7 +94,7 @@ const Login = () => {
           >
             Login
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
