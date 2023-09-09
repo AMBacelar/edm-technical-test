@@ -79,6 +79,8 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
+    // if this was a real endpoint, I would have some sort of polling
+    // or consider only running the query on submit
     fetch(
       `${serverUrl}/users?${new URLSearchParams({
         query,
@@ -147,7 +149,7 @@ const Dashboard = () => {
       </div>
 
       <div className="data-section">
-        <div className="space-between">
+        <div className={isEditor ? "space-between" : ""}>
           <div className="search-wrapper">
             <label htmlFor="query">Search:</label>
             <input

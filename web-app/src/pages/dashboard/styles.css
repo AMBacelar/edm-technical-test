@@ -1,6 +1,3 @@
-.table-wrapper {
-  display: flex;
-}
 .Rtable {
   display: flex;
   flex-wrap: wrap;
@@ -8,10 +5,10 @@
 }
 
 .Rtable .Rtable-cell {
-  width: 25%;
   border-bottom: 1px solid #373b42;
-  padding: 5px 0;
   display: flex;
+  padding: 5px 0;
+  width: 25%;
 }
 
 .Rtable.editor .Rtable-cell {
@@ -19,21 +16,21 @@
 }
 
 .Rtable .Rtable-cell.sort-option {
-  cursor: pointer;
   border-bottom: 1px solid white;
+  cursor: pointer;
   padding-bottom: 8px;
 }
 
 .button {
-  cursor: pointer;
-  padding: 4px 8px;
-  background: #4b5362;
   background-image: none;
-  text-transform: none;
-  border: none;
+  background: #4b5362;
   border-radius: 4px;
+  border: none;
+  cursor: pointer;
   font-size: larger;
   margin: 4px;
+  padding: 4px 8px;
+  text-transform: none;
   transition: all 0.2s;
 }
 .button:hover {
@@ -64,34 +61,41 @@
 
 .breadcrumbs {
   color: white;
-  margin: 0 4px;
   cursor: pointer;
+  margin: 0 4px;
   text-decoration: none;
 }
 
+h1 {
+  margin-bottom: 0;
+}
 .metadata {
   font-size: small;
 }
 
 .data-section {
   margin-top: 24px;
+  position: relative;
 }
 
 .search-wrapper {
   display: flex;
   flex-direction: column;
 }
+.search-wrapper label {
+  font-size: small;
+}
 .search-input {
-  width: 100%;
+  border-radius: 8px;
   font-size: 0.875rem;
   line-height: 1.5rem;
   padding: 2px 6px;
 }
 
 .space-between {
+  align-items: center;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .labels {
@@ -109,26 +113,24 @@
   }
   .Rtable.editor .Rtable-cell {
     border-bottom: none;
-    width: unset;
-    max-width: 800px;
-
-    padding: 8px;
-
     border-left: 1px solid white;
     border-right: 1px solid white;
+    max-width: 800px;
+    padding: 8px;
+    width: unset;
   }
 
   .Rtable.editor .Rtable-cell.Rtable-cell--head {
-    margin-top: 10px;
-    border-top: 1px solid white;
-    border-radius: 15px 15px 0 0;
     background: #30353e;
+    border-radius: 15px 15px 0 0;
+    border-top: 1px solid white;
     font-weight: bold;
+    margin-top: 10px;
   }
   .Rtable.editor .Rtable-cell.Rtable-cell--tail {
-    margin-bottom: 10px;
     border-bottom: 1px solid white;
     border-radius: 0 0 15px 15px;
+    margin-bottom: 10px;
   }
 
   .Rtable.editor .Rtable-cell.sort-option {
@@ -146,25 +148,23 @@
   }
   .Rtable.viewer .Rtable-cell {
     border-bottom: none;
-    width: unset;
-    max-width: 800px;
-
-    padding: 8px;
-
     border-left: 1px solid white;
     border-right: 1px solid white;
+    max-width: 800px;
+    padding: 8px;
+    width: unset;
   }
   .Rtable.viewer .Rtable-cell.Rtable-cell--head {
-    margin-top: 10px;
-    border-top: 1px solid white;
-    border-radius: 15px 15px 0 0;
     background: #30353e;
+    border-radius: 15px 15px 0 0;
+    border-top: 1px solid white;
     font-weight: bold;
+    margin-top: 10px;
   }
   .Rtable.viewer .Rtable-cell.Rtable-cell--tail {
-    margin-bottom: 10px;
     border-bottom: 1px solid white;
     border-radius: 0 0 15px 15px;
+    margin-bottom: 10px;
   }
   .Rtable.viewer .Rtable-cell.sort-option {
     display: none;
