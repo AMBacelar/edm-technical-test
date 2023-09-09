@@ -39,11 +39,53 @@ app.get("/", (req, res) => {
 });
 
 app.get("/users", (req, res) => {
-  let query = req.query.query;
-  let sortBy = req.query.sortBy;
+  const query = req.query.query;
+  const sortBy = req.query.sortBy;
   // got to add filtering and sorting logic here
+  const filteredData = db.data.filter((item) => {
+    if (!query) return true;
+    // I'll just do a simple check if any of the fields contain any of the query
+    for (const key in item) {
+      if (
+        key !== "id" &&
+        item[key].toLowerCase().includes(query.toLowerCase())
+      ) {
+        return true;
+      }
+    }
+    return false;
+  });
 
-  res.send(db.data);
+  const sortMap = {
+    usernameAsc: "username",
+    firstNameAsc: "firstName",
+    lastNameAsc: "lastName",
+    emailAsc: "email",
+    usernameDec: "username",
+    firstNameDec: "firstName",
+    lastNameDec: "lastName",
+    emailDec: "email",
+  };
+
+  const sortedData = sortBy
+    ? filteredData.sort((a, b) => {
+        if (
+          new String(a[sortMap[sortBy]]).valueOf() ===
+          new String(b[sortMap[sortBy]]).valueOf()
+        ) {
+          return 0;
+        }
+        let comparison =
+          new String(a[sortMap[sortBy]]).valueOf() <
+          new String(b[sortMap[sortBy]]).valueOf()
+            ? 1
+            : -1;
+
+        return sortBy.includes("Dec") ? -comparison : comparison;
+      })
+    : filteredData;
+
+  res.send(sortedData);
 });
 
 // of course there should be some sort of back end auth using cookies/tokens
