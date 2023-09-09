@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
+import "./styles.css";
 
 const serverUrl = process.env.REACT_APP_SERVER;
 
@@ -11,7 +12,16 @@ type Person = {
   id: string;
 };
 
-const PersonItem = ({ person }: { person: Person }) => {
+const PersonItem = ({
+  person,
+  handleDeletePerson,
+  handleUpdatePerson,
+}: {
+  person: Person;
+  handleDeletePerson: (id: string) => void;
+  handleUpdatePerson: (id: string) => void;
+}) => {
+  const { user } = useAuth();
   return (
     <>
       <div className="Rtable-cell Rtable-cell--head">
@@ -21,6 +31,16 @@ const PersonItem = ({ person }: { person: Person }) => {
       <div className="Rtable-cell">{person.lastName}</div>
       <div className="Rtable-cell Rtable-cell--foot">
         <strong>{person.email}</strong>
+        {user?.username === "Editor" && (
+          <div>
+            <button onClick={() => handleUpdatePerson(person.id)}>
+              edit entry
+            </button>
+            <button onClick={() => handleDeletePerson(person.id)}>
+              delete entry
+            </button>
+          </div>
+        )}
       </div>
     </>
   );
@@ -78,6 +98,14 @@ const Dashboard = () => {
     [setQuery]
   );
 
+  const handleDeletePerson = useCallback((id: string) => {
+    console.log("deleting:", id);
+  }, []);
+
+  const handleUpdatePerson = useCallback((id: string) => {
+    console.log("updating:", id);
+  }, []);
+
   return (
     <div>
       <h1>People</h1>
@@ -94,30 +122,35 @@ const Dashboard = () => {
         <div className="Rtable">
           <div
             onClick={() => handleSortClick("username")}
-            className="Rtable-cell Rtable-cell--head"
+            className="Rtable-cell sort-option"
           >
             <strong>username</strong>
           </div>
           <div
             onClick={() => handleSortClick("firstName")}
-            className="Rtable-cell"
+            className="Rtable-cell sort-option"
           >
             <strong>firstName</strong>
           </div>
           <div
             onClick={() => handleSortClick("lastName")}
-            className="Rtable-cell"
+            className="Rtable-cell sort-option"
           >
             <strong>lastName</strong>
           </div>
           <div
             onClick={() => handleSortClick("email")}
-            className="Rtable-cell Rtable-cell--foot"
+            className="Rtable-cell sort-option"
           >
             <strong>email</strong>
           </div>
           {users.map((person) => (
-            <PersonItem key={person.id} person={person} />
+            <PersonItem
+              key={person.id}
+              person={person}
+              handleDeletePerson={handleDeletePerson}
+              handleUpdatePerson={handleUpdatePerson}
+            />
           ))}
         </div>
       </div>

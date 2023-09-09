@@ -76,7 +76,7 @@ app.get("/users", (req, res) => {
           return 0;
         }
         let comparison =
-          new String(a[sortMap[sortBy]]).valueOf() <
+          new String(a[sortMap[sortBy]]).valueOf() >
           new String(b[sortMap[sortBy]]).valueOf()
             ? 1
             : -1;

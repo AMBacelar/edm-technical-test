@@ -9,3 +9,7 @@
 
 .Rtable-cell--foot {
 }
+
+.sort-option {
+  cursor: pointer;
+}

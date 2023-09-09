@@ -11,11 +11,21 @@ const Routes = () => {
   // with access to the auth context to know whether
   // the user is logged in or not
 
+  <div className="wrapper"></div>;
+
   const { user } = useAuth();
   if (!user) {
-    return <Login />;
+    return (
+      <div className="wrapper">
+        <Login />
+      </div>
+    );
   }
-  return <Dashboard />;
+  return (
+    <div className="wrapper">
+      <Dashboard />
+    </div>
+  );
 };
 
 const App = () => {
