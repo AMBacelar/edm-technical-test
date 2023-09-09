@@ -1,7 +1,7 @@
 .Rtable {
   display: flex;
   flex-wrap: wrap;
-  margin: 30px auto;
+  margin: auto;
 }
 
 .Rtable .Rtable-cell {
@@ -73,6 +73,11 @@ h1 {
   font-size: small;
 }
 
+.add-entry--wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
 .data-section {
   margin-top: 24px;
   position: relative;
@@ -103,7 +108,7 @@ h1 {
   margin-right: 8px;
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 800px) {
   .Rtable.editor .labels {
     display: block;
   }

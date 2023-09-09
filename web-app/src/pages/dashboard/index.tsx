@@ -149,25 +149,24 @@ const Dashboard = () => {
       </div>
 
       <div className="data-section">
-        <div className={isEditor ? "space-between" : ""}>
-          <div className="search-wrapper">
-            <label htmlFor="query">Search:</label>
-            <input
-              className="search-input"
-              placeholder="search query"
-              name="query"
-              value={query}
-              onChange={(e) => handleQueryChange(e.target.value)}
-            />
-          </div>
-          {isEditor && (
-            <div>
-              <button onClick={() => handleNewPerson()} className="button blue">
-                Add Entry
-              </button>
-            </div>
-          )}
+        <div className="search-wrapper">
+          <label htmlFor="query">Search:</label>
+          <input
+            className="search-input"
+            placeholder="search query"
+            name="query"
+            value={query}
+            onChange={(e) => handleQueryChange(e.target.value)}
+          />
         </div>
+
+        {isEditor && (
+          <div className="add-entry--wrapper">
+            <button onClick={() => handleNewPerson()} className="button blue">
+              Add Entry
+            </button>
+          </div>
+        )}
         <div className={`Rtable ${isEditor ? "editor" : "viewer"}`}>
           <div
             onClick={() => handleSortClick("username")}
