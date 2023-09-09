@@ -16,7 +16,7 @@ export function createRandomUser() {
   };
 }
 export const users = faker.helpers.multiple(createRandomUser, {
-  count: 10,
+  count: 30,
 });
 
 const app = express();
