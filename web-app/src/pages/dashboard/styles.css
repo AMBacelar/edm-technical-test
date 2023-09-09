@@ -1,3 +1,6 @@
+.table-wrapper {
+  display: flex;
+}
 .Rtable {
   display: flex;
   flex-wrap: wrap;
@@ -8,6 +11,7 @@
   width: 25%;
   border-bottom: 1px solid #373b42;
   padding: 5px 0;
+  display: flex;
 }
 
 .Rtable.editor .Rtable-cell {
@@ -92,6 +96,7 @@
 
 .labels {
   display: none;
+  margin-right: 8px;
 }
 
 @media only screen and (max-width: 1100px) {
@@ -99,16 +104,31 @@
     display: block;
   }
   .Rtable.editor {
-    display: block;
+    flex-direction: column;
+    flex-wrap: nowrap;
   }
   .Rtable.editor .Rtable-cell {
     border-bottom: none;
-    width: 100%;
+    width: unset;
+    max-width: 800px;
+
+    padding: 8px;
+
+    border-left: 1px solid white;
+    border-right: 1px solid white;
   }
 
+  .Rtable.editor .Rtable-cell.Rtable-cell--head {
+    margin-top: 10px;
+    border-top: 1px solid white;
+    border-radius: 15px 15px 0 0;
+    background: #30353e;
+    font-weight: bold;
+  }
   .Rtable.editor .Rtable-cell.Rtable-cell--tail {
     margin-bottom: 10px;
     border-bottom: 1px solid white;
+    border-radius: 0 0 15px 15px;
   }
 
   .Rtable.editor .Rtable-cell.sort-option {
@@ -116,27 +136,37 @@
   }
 }
 
-@media only screen and (max-width: 500px) {
-  .search-input {
-    width: 100%;
-  }
-
-  .Rtable .labels {
+@media only screen and (max-width: 600px) {
+  .Rtable.viewer .labels {
     display: block;
   }
-  .Rtable {
-    display: block;
+  .Rtable.viewer {
+    flex-direction: column;
+    flex-wrap: nowrap;
   }
-  .Rtable .Rtable-cell {
+  .Rtable.viewer .Rtable-cell {
     border-bottom: none;
-    width: 100%;
-    display: flex;
+    width: unset;
+    max-width: 800px;
+
+    padding: 8px;
+
+    border-left: 1px solid white;
+    border-right: 1px solid white;
   }
-  .Rtable .Rtable-cell.Rtable-cell--tail {
+  .Rtable.viewer .Rtable-cell.Rtable-cell--head {
+    margin-top: 10px;
+    border-top: 1px solid white;
+    border-radius: 15px 15px 0 0;
+    background: #30353e;
+    font-weight: bold;
+  }
+  .Rtable.viewer .Rtable-cell.Rtable-cell--tail {
     margin-bottom: 10px;
     border-bottom: 1px solid white;
+    border-radius: 0 0 15px 15px;
   }
-  .Rtable .Rtable-cell.sort-option {
+  .Rtable.viewer .Rtable-cell.sort-option {
     display: none;
   }
 }

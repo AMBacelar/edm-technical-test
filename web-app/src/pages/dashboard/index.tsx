@@ -25,10 +25,7 @@ const PersonItem = ({
   const isEditor = user?.username === "Editor";
   return (
     <>
-      <div className="Rtable-cell Rtable-cell--head">
-        <span className="labels">User Name:</span>
-        {person.username}
-      </div>
+      <div className="Rtable-cell Rtable-cell--head">{person.username}</div>
       <div className="Rtable-cell">
         <span className="labels">First Name:</span>
         {person.firstName}
@@ -169,7 +166,7 @@ const Dashboard = () => {
             </div>
           )}
         </div>
-        <div className={`Rtable ${isEditor && "editor"}`}>
+        <div className={`Rtable ${isEditor ? "editor" : "viewer"}`}>
           <div
             onClick={() => handleSortClick("username")}
             className="Rtable-cell sort-option"
