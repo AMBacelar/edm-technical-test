@@ -20,8 +20,6 @@ const Dashboard = () => {
       .then((data) => setUsers(data));
   }, []);
 
-  console.log(process.env.REACT_APP_SERVER);
-
   return (
     <div>
       <p>a new page...</p>

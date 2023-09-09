@@ -39,7 +39,10 @@ app.get("/", (req, res) => {
 });
 
 app.get("/users", (req, res) => {
-  // got to add filtering and sorting here
+  let query = req.query.query;
+  let sortBy = req.query.sortBy;
+  // got to add filtering and sorting logic here
+
   res.send(db.data);
 });
 
@@ -51,8 +54,26 @@ app.post("/users", async (req, res) => {
   await db.write();
   res.send({ result: "ok", users: db.data });
 });
-app.delete("/users/:id", (req, res) => {});
-app.put("/users/:id", (req, res) => {});
+app.delete("/users/:id", async (req, res) => {
+  const id = req.params.id;
+  const index = db.data.findIndex((item) => item.id === id);
+  if (index > -1) {
+    db.data.splice(index, 1);
+  }
+
+  await db.write();
+  res.send({ result: "ok", users: db.data });
+});
+app.put("/users/:id", async (req, res) => {
+  const id = req.params.id;
+  const index = db.data.findIndex((item) => item.id === id);
+  if (index > -1) {
+    db.data[index] = { ...req.body.user };
+  }
+
+  await db.write();
+  res.send({ result: "ok", users: db.data });
+});
 
 // this is just if you want to store the current state of the db to disk
 app.post("/store", async (req, res) => {
