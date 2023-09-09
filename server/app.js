@@ -7,11 +7,21 @@ import { JSONFile } from "lowdb/node";
 import { faker } from "@faker-js/faker";
 
 export function createRandomUser() {
-  return {
-    username: faker.internet.userName(),
+  const user = {
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
-    email: faker.internet.email(),
+  };
+  return {
+    username: faker.internet.userName({
+      firstName: user.firstName,
+      lastName: user.lastName,
+    }),
+    firstName: user.firstName,
+    lastName: user.lastName,
+    email: faker.internet.email({
+      firstName: user.firstName,
+      lastName: user.lastName,
+    }),
     id: faker.string.uuid(),
   };
 }
