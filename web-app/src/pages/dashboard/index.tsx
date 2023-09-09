@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import "./styles.css";
 import { ModalContext } from "../../context/ModalContext";
+import { TextInput } from "../../components/textInput";
 
 const serverUrl = process.env.REACT_APP_SERVER;
 
@@ -163,16 +164,13 @@ const Dashboard = () => {
       </div>
 
       <div className="data-section">
-        <div className="text-input-wrapper">
-          <label htmlFor="query">Search:</label>
-          <input
-            className="text-input"
-            placeholder="search query"
-            name="query"
-            value={query}
-            onChange={(e) => handleQueryChange(e.target.value)}
-          />
-        </div>
+        <TextInput
+          label="Search:"
+          placeholder="search query"
+          name="query"
+          value={query}
+          onChange={(e) => handleQueryChange(e.target.value)}
+        />
 
         {isEditor && (
           <div className="add-entry--wrapper">

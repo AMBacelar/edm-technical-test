@@ -1,6 +1,7 @@
 import React, { SyntheticEvent, useEffect, useState } from "react";
 import "./styles.css";
 import { useAuth } from "../../hooks/useAuth";
+import { TextInput } from "../../components/textInput";
 
 const Login = () => {
   const [username, setUsername] = useState<string>("");
@@ -51,30 +52,23 @@ const Login = () => {
     <div className="App">
       <div className="App-header">
         <form name="login-form" onSubmit={onSubmit} className="login-form">
-          <div className="text-input-wrapper">
-            <label htmlFor="username">Username</label>
-            <input
-              className="text-input"
-              type="text"
-              placeholder="Enter Username"
-              name="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-            />
-          </div>
-          <div className="text-input-wrapper">
-            <label htmlFor="password">Password</label>
-            <input
-              className="text-input"
-              type="password"
-              placeholder="Enter Password"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
+          <TextInput
+            label="Username"
+            placeholder="Enter Username"
+            name="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <TextInput
+            label="Password"
+            type="password"
+            placeholder="Enter Password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
           {password.length > 0 && errors.length > 0 && (
             <div className="error-message">
