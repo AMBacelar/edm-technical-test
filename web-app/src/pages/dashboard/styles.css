@@ -1,15 +1,142 @@
 .Rtable {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px auto;
 }
 
-.Rtable-cell {
+.Rtable .Rtable-cell {
+  width: 25%;
+  border-bottom: 1px solid #373b42;
+  padding: 5px 0;
 }
 
-.Rtable-cell--head {
+.Rtable.editor .Rtable-cell {
+  width: 20%;
 }
 
-.Rtable-cell--foot {
-}
-
-.sort-option {
+.Rtable .Rtable-cell.sort-option {
   cursor: pointer;
+  border-bottom: 1px solid white;
+  padding-bottom: 8px;
+}
+
+.button {
+  cursor: pointer;
+  padding: 4px 8px;
+  background: #4b5362;
+  background-image: none;
+  text-transform: none;
+  border: none;
+  border-radius: 4px;
+  font-size: larger;
+  margin: 4px;
+  transition: all 0.2s;
+}
+.button:hover {
+  background: #70798c;
+}
+
+.button.red {
+  background: #b71c1c;
+  color: white;
+}
+.button.red:hover {
+  background: #e53935;
+}
+.button.green {
+  background: #0d47a1;
+  color: white;
+}
+.button.green:hover {
+  background: #2196f3;
+}
+.button.blue {
+  background: #0d47a1;
+  color: white;
+}
+.button.blue:hover {
+  background: #2196f3;
+}
+
+.breadcrumbs {
+  color: white;
+  margin: 0 4px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.metadata {
+  font-size: small;
+}
+
+.data-section {
+  margin-top: 24px;
+}
+
+.search-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.search-input {
+  width: 100%;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  padding: 2px 6px;
+}
+
+.space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.labels {
+  display: none;
+}
+
+@media only screen and (max-width: 1100px) {
+  .Rtable.editor .labels {
+    display: block;
+  }
+  .Rtable.editor {
+    display: block;
+  }
+  .Rtable.editor .Rtable-cell {
+    border-bottom: none;
+    width: 100%;
+  }
+
+  .Rtable.editor .Rtable-cell.Rtable-cell--tail {
+    margin-bottom: 10px;
+    border-bottom: 1px solid white;
+  }
+
+  .Rtable.editor .Rtable-cell.sort-option {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .search-input {
+    width: 100%;
+  }
+
+  .Rtable .labels {
+    display: block;
+  }
+  .Rtable {
+    display: block;
+  }
+  .Rtable .Rtable-cell {
+    border-bottom: none;
+    width: 100%;
+    display: flex;
+  }
+  .Rtable .Rtable-cell.Rtable-cell--tail {
+    margin-bottom: 10px;
+    border-bottom: 1px solid white;
+  }
+  .Rtable .Rtable-cell.sort-option {
+    display: none;
+  }
 }

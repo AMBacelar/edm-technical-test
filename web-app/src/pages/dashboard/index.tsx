@@ -22,32 +22,50 @@ const PersonItem = ({
   handleUpdatePerson: (id: string) => void;
 }) => {
   const { user } = useAuth();
+  const isEditor = user?.username === "Editor";
   return (
     <>
       <div className="Rtable-cell Rtable-cell--head">
-        <h3>{person.username}</h3>
+        <span className="labels">User Name:</span>
+        {person.username}
       </div>
-      <div className="Rtable-cell">{person.firstName}</div>
-      <div className="Rtable-cell">{person.lastName}</div>
-      <div className="Rtable-cell Rtable-cell--foot">
-        <strong>{person.email}</strong>
-        {user?.username === "Editor" && (
+      <div className="Rtable-cell">
+        <span className="labels">First Name:</span>
+        {person.firstName}
+      </div>
+      <div className="Rtable-cell">
+        <span className="labels">Last Name:</span>
+        {person.lastName}
+      </div>
+      <div className={`Rtable-cell ${isEditor ? "" : "Rtable-cell--tail"}`}>
+        <span className="labels">E-Mail:</span>
+        {person.email}
+      </div>
+      {isEditor && (
+        <div className={"Rtable-cell Rtable-cell--tail"}>
           <div>
-            <button onClick={() => handleUpdatePerson(person.id)}>
+            <button
+              className="button"
+              onClick={() => handleUpdatePerson(person.id)}
+            >
               edit entry
             </button>
-            <button onClick={() => handleDeletePerson(person.id)}>
+            <button
+              className="button red"
+              onClick={() => handleDeletePerson(person.id)}
+            >
               delete entry
             </button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 };
 
 const Dashboard = () => {
   const { user, logout } = useAuth();
+  const isEditor = user?.username === "Editor";
   const [users, setUsers] = useState<Person[]>([]);
 
   const [query, setQuery] = useState("");
@@ -106,44 +124,84 @@ const Dashboard = () => {
     console.log("updating:", id);
   }, []);
 
+  const handleNewPerson = () => console.log("new person modal");
+
   return (
     <div>
-      <h1>People</h1>
       <div>
-        <button onClick={() => logout()}>Logout</button>
-        {user?.username === "Editor" && <button>Add Entry</button>}
+        <a className="breadcrumbs" href="/#">
+          Jobs
+        </a>
+        |
+        <a className="breadcrumbs" href="/#">
+          Engineering
+        </a>
       </div>
-      <input
-        value={query}
-        onChange={(e) => handleQueryChange(e.target.value)}
-      />
-      <div>current sort: {sortBy}</div>
-      <div>
-        <div className="Rtable">
+      <div className="space-between">
+        <h1>Front End Developers</h1>
+        <div>
+          <button className="button red" onClick={() => logout()}>
+            Logout
+          </button>
+        </div>
+      </div>
+      <div className="metadata">
+        Full-time | On Location | Salary TBC | Dubai
+      </div>
+
+      <div className="data-section">
+        <div className="space-between">
+          <div className="search-wrapper">
+            <label htmlFor="query">Search:</label>
+            <input
+              className="search-input"
+              placeholder="search query"
+              name="query"
+              value={query}
+              onChange={(e) => handleQueryChange(e.target.value)}
+            />
+          </div>
+          {isEditor && (
+            <div>
+              <button onClick={() => handleNewPerson()} className="button blue">
+                Add Entry
+              </button>
+            </div>
+          )}
+        </div>
+        <div className={`Rtable ${isEditor && "editor"}`}>
           <div
             onClick={() => handleSortClick("username")}
             className="Rtable-cell sort-option"
           >
-            <strong>username</strong>
+            <strong>Username</strong>
           </div>
           <div
             onClick={() => handleSortClick("firstName")}
             className="Rtable-cell sort-option"
           >
-            <strong>firstName</strong>
+            <strong>First Name</strong>
           </div>
           <div
             onClick={() => handleSortClick("lastName")}
             className="Rtable-cell sort-option"
           >
-            <strong>lastName</strong>
+            <strong>Last Name</strong>
           </div>
           <div
             onClick={() => handleSortClick("email")}
             className="Rtable-cell sort-option"
           >
-            <strong>email</strong>
+            <strong>E-mail</strong>
           </div>
+          {isEditor && (
+            <div
+              onClick={() => handleSortClick("email")}
+              className="Rtable-cell sort-option"
+            >
+              <strong>Editor options</strong>
+            </div>
+          )}
           {users.map((person) => (
             <PersonItem
               key={person.id}
