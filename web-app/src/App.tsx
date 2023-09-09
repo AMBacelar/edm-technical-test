@@ -22,7 +22,7 @@ const App = () => {
   const [user, setUser] = useState<User | null>(null);
   return (
     <AuthContext.Provider value={{ user, setUser }}>
-      <Login />
+      <Routes />
     </AuthContext.Provider>
   );
 };
