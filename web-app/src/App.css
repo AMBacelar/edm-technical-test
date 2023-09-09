@@ -31,11 +31,11 @@ html {
   background: #e53935;
 }
 .button.green {
-  background: #0d47a1;
+  background: #2e7d32;
   color: white;
 }
 .button.green:hover {
-  background: #2196f3;
+  background: #4caf50;
 }
 .button.blue {
   background: #0d47a1;
@@ -52,6 +52,7 @@ html {
   color: white;
   font-size: 0.875rem;
   line-height: 1.5rem;
+  margin: 10px 0;
   outline: none;
   padding: 2px 6px;
   transition: 0.3s;
