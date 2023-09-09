@@ -11,17 +11,19 @@ export type ModalType = "confirm-delete" | "create" | "edit";
 
 type BaseModalProps = {
   type: ModalType;
+};
+export type ConfirmDeleteModalProps = BaseModalProps & {
+  type: "confirm-delete";
   onSubmit: () => void;
 };
-type ConfirmDeleteModalProps = BaseModalProps & {
-  type: "confirm-delete";
-};
-type EditModalProps = BaseModalProps & {
+export type EditModalProps = BaseModalProps & {
   type: "edit";
   person: Person;
+  onSubmit: (person: Person) => void;
 };
-type CreateModalProps = BaseModalProps & {
+export type CreateModalProps = BaseModalProps & {
   type: "create";
+  onSubmit: (person: Person) => void;
 };
 
 export type ModalProps =
