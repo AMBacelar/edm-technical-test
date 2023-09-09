@@ -12,6 +12,7 @@ export function createRandomUser() {
     firstName: faker.person.firstName(),
     lastName: faker.person.lastName(),
     email: faker.internet.email(),
+    id: faker.string.uuid(),
   };
 }
 export const users = faker.helpers.multiple(createRandomUser, {
@@ -38,7 +39,25 @@ app.get("/", (req, res) => {
 });
 
 app.get("/users", (req, res) => {
+  // got to add filtering and sorting here
   res.send(db.data);
+});
+
+// of course there should be some sort of back end auth using cookies/tokens
+// but I believe I'm pushing the scope of a fron-end technical test already T_T
+app.post("/users", async (req, res) => {
+  // same with making sure that the email is unique?
+  db.data.push({ ...req.body.user, id: faker.string.uuid() });
+  await db.write();
+  res.send({ result: "ok", users: db.data });
+});
+app.delete("/users/:id", (req, res) => {});
+app.put("/users/:id", (req, res) => {});
+
+// this is just if you want to store the current state of the db to disk
+app.post("/store", async (req, res) => {
+  await db.write();
+  res.send({ result: "ok" });
 });
 
 app.listen(port, () => {
