@@ -5,6 +5,7 @@ import { AuthContext } from "./context/AuthContext";
 import { User } from "./hooks/useUser";
 import { useAuth } from "./hooks/useAuth";
 import Dashboard from "./pages/dashboard";
+import { ModalContextProvider } from "./context/ModalContext";
 
 const Routes = () => {
   // there are no routes tbf... I just need a component
@@ -32,7 +33,9 @@ const App = () => {
   const [user, setUser] = useState<User | null>(null);
   return (
     <AuthContext.Provider value={{ user, setUser }}>
-      <Routes />
+      <ModalContextProvider>
+        <Routes />
+      </ModalContextProvider>
     </AuthContext.Provider>
   );
 };

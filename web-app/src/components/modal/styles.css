@@ -1,0 +1,36 @@
+.modal {
+  background-color: rgba(0, 0, 0, 0.4);
+  display: block;
+  height: 100%;
+  left: 0;
+  overflow: auto;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.modal-content {
+  background-color: #282c34;
+  border-radius: 12px;
+  margin: 15% auto;
+  max-width: 500px;
+  padding: 20px;
+  width: 80%;
+}
+
+.modal-close {
+  background-color: transparent;
+  border: none;
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}

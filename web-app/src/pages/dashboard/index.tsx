@@ -1,15 +1,16 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import "./styles.css";
+import { ModalContext } from "../../context/ModalContext";
 
 const serverUrl = process.env.REACT_APP_SERVER;
 
-type Person = {
+export type Person = {
   username: string;
   firstName: string;
   lastName: string;
   email: string;
-  id: string;
+  id?: string;
 };
 
 const PersonItem = ({
@@ -22,6 +23,7 @@ const PersonItem = ({
   handleUpdatePerson: (id: string) => void;
 }) => {
   const { user } = useAuth();
+  const { showModal } = useContext(ModalContext);
   const isEditor = user?.username === "Editor";
   return (
     <>
@@ -43,13 +45,24 @@ const PersonItem = ({
           <div>
             <button
               className="button"
-              onClick={() => handleUpdatePerson(person.id)}
+              onClick={() => {
+                showModal({
+                  onSubmit: () => handleUpdatePerson(person.id!),
+                  type: "edit",
+                  person,
+                });
+              }}
             >
               edit entry
             </button>
             <button
               className="button red"
-              onClick={() => handleDeletePerson(person.id)}
+              onClick={() =>
+                showModal({
+                  onSubmit: () => handleDeletePerson(person.id!),
+                  type: "confirm-delete",
+                })
+              }
             >
               delete entry
             </button>
@@ -66,6 +79,7 @@ const Dashboard = () => {
   const [users, setUsers] = useState<Person[]>([]);
 
   const [query, setQuery] = useState("");
+  const { showModal } = useContext(ModalContext);
 
   type SortCategories = "username" | "firstName" | "lastName" | "email";
   type SortOptions = `${SortCategories}Asc` | `${SortCategories}Desc`;
@@ -162,7 +176,12 @@ const Dashboard = () => {
 
         {isEditor && (
           <div className="add-entry--wrapper">
-            <button onClick={() => handleNewPerson()} className="button blue">
+            <button
+              onClick={() =>
+                showModal({ onSubmit: () => handleNewPerson(), type: "create" })
+              }
+              className="button blue"
+            >
               Add Entry
             </button>
           </div>
