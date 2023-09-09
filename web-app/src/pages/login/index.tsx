@@ -6,7 +6,6 @@ const Login = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [errors, setErrors] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isValid, setIsValid] = useState<boolean>(false);
 
   // password validation
@@ -84,7 +83,7 @@ const Login = () => {
             </div>
           )}
 
-          <button disabled={!isValid || isLoading} type="submit">
+          <button disabled={!isValid} type="submit">
             Login
           </button>
         </form>

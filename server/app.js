@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { Low } from "lowdb";
@@ -18,6 +19,7 @@ export const users = faker.helpers.multiple(createRandomUser, {
 });
 
 const app = express();
+app.use(cors());
 const port = process.env.PORT || 3001;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
