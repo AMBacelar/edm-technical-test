@@ -118,13 +118,14 @@ const EditPersonModalContent = ({ onSubmit, person }: EditModalProps) => {
 
   const handleSubmit = (e: SyntheticEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    const person = {
+    const newPerson = {
       username,
       firstName,
       lastName,
       email,
+      id: person.id,
     };
-    onSubmit(person);
+    onSubmit(newPerson);
   };
 
   const isValid =

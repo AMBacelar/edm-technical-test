@@ -31,6 +31,7 @@ export const users = faker.helpers.multiple(createRandomUser, {
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 const port = process.env.PORT || 3001;
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -102,7 +103,7 @@ app.get("/users", (req, res) => {
 // but I believe I'm pushing the scope of a fron-end technical test already T_T
 app.post("/users", async (req, res) => {
   // same with making sure that the email is unique?
-  db.data.push({ ...req.body.user, id: faker.string.uuid() });
+  db.data.push({ ...req.body, id: faker.string.uuid() });
   await db.write();
   res.send({ result: "ok", users: db.data });
 });
@@ -120,7 +121,7 @@ app.put("/users/:id", async (req, res) => {
   const id = req.params.id;
   const index = db.data.findIndex((item) => item.id === id);
   if (index > -1) {
-    db.data[index] = { ...req.body.user };
+    db.data[index] = { ...req.body };
   }
 
   await db.write();

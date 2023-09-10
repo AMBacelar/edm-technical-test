@@ -21,7 +21,7 @@ const PersonItem = ({
 }: {
   person: Person;
   handleDeletePerson: (id: string) => void;
-  handleUpdatePerson: (id: string) => void;
+  handleUpdatePerson: (person: Person) => void;
 }) => {
   const { user } = useAuth();
   const { showModal } = useContext(ModalContext);
@@ -48,7 +48,7 @@ const PersonItem = ({
               className="button"
               onClick={() => {
                 showModal({
-                  onSubmit: () => handleUpdatePerson(person.id!),
+                  onSubmit: (person) => handleUpdatePerson(person),
                   type: "edit",
                   person,
                 });
@@ -80,7 +80,7 @@ const Dashboard = () => {
   const [users, setUsers] = useState<Person[]>([]);
 
   const [query, setQuery] = useState("");
-  const { showModal } = useContext(ModalContext);
+  const { showModal, hideModal } = useContext(ModalContext);
 
   type SortCategories = "username" | "firstName" | "lastName" | "email";
   type SortOptions = `${SortCategories}Asc` | `${SortCategories}Desc`;
@@ -130,15 +130,62 @@ const Dashboard = () => {
     [setQuery]
   );
 
-  const handleDeletePerson = useCallback((id: string) => {
-    console.log("deleting:", id);
-  }, []);
+  const handleDeletePerson = useCallback(
+    (id: string) => {
+      fetch(`${serverUrl}/users/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setQuery("");
+          setSortBy(undefined);
+          setUsers(data.users);
+          hideModal();
+        });
+    },
+    [hideModal]
+  );
 
-  const handleUpdatePerson = useCallback((id: string) => {
-    console.log("updating:", id);
-  }, []);
+  const handleUpdatePerson = useCallback(
+    (updatedPerson: Person) => {
+      console.log(updatedPerson);
+      fetch(`${serverUrl}/users/${updatedPerson.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedPerson),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setQuery("");
+          setSortBy(undefined);
+          setUsers(data.users);
+          hideModal();
+        });
+    },
+    [hideModal]
+  );
 
-  const handleNewPerson = () => console.log("new person modal");
+  const handleNewPerson = useCallback(
+    (newPerson: Person) => {
+      fetch(`${serverUrl}/users`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPerson),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setQuery("");
+          setSortBy(undefined);
+          setUsers(data.users);
+          hideModal();
+        });
+    },
+    [hideModal]
+  );
 
   return (
     <div>
@@ -176,7 +223,10 @@ const Dashboard = () => {
           <div className="add-entry--wrapper">
             <button
               onClick={() =>
-                showModal({ onSubmit: () => handleNewPerson(), type: "create" })
+                showModal({
+                  onSubmit: (person) => handleNewPerson(person),
+                  type: "create",
+                })
               }
               className="button blue"
             >
