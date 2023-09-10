@@ -43,6 +43,11 @@ h1 {
 .data-section {
   margin-top: 24px;
   position: relative;
+  background-color: rgba(255, 255, 255, 0.02);
+  border-radius: 20px;
+  padding: 20px;
+
+  box-shadow: 9px 9px 18px #2f3238, -9px -9px 18px #3f444c;
 }
 
 .space-between {
@@ -65,6 +70,7 @@ h1 {
     flex-wrap: nowrap;
   }
   .Rtable.editor .Rtable-cell {
+    background-color: rgba(255, 255, 255, 0.13);
     border-bottom: none;
     border-left: 1px solid white;
     border-right: 1px solid white;
@@ -100,6 +106,7 @@ h1 {
     flex-wrap: nowrap;
   }
   .Rtable.viewer .Rtable-cell {
+    background-color: rgba(255, 255, 255, 0.13);
     border-bottom: none;
     border-left: 1px solid white;
     border-right: 1px solid white;
