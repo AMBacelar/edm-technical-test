@@ -6,9 +6,15 @@
 
 .Rtable .Rtable-cell {
   border-bottom: 1px solid #373b42;
-  display: flex;
-  padding: 5px 0;
+  overflow: hidden;
+  padding: 5px 0px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   width: 25%;
+}
+
+.Rtable .Rtable-cell.Rtable-cell--tail {
+  white-space: normal;
 }
 
 .Rtable.editor .Rtable-cell {
@@ -74,6 +80,7 @@ h1 {
     border-bottom: none;
     border-left: 1px solid white;
     border-right: 1px solid white;
+    display: flex;
     max-width: 800px;
     padding: 8px;
     width: unset;
@@ -110,6 +117,7 @@ h1 {
     border-bottom: none;
     border-left: 1px solid white;
     border-right: 1px solid white;
+    display: flex;
     max-width: 800px;
     padding: 8px;
     width: unset;

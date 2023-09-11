@@ -1,4 +1,4 @@
-import react, { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import "./styles.css";
 import {
   ConfirmDeleteModalProps,
